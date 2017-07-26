@@ -1,4 +1,20 @@
+class Contact:
+    def __init__(self, name, phone, email):
+        self._name = name
+        self._phone = phone
+        self._email = email
+
+class ContactBook(object):
+    def __init__(self):
+        self._contacts = []
+
+    def add(self, name, phone, email):
+        print('name: {}, phone: {}, email: {}'.format(name, phone, email))
+        
+
 def run():
+
+    contact_book = ContactBook()
 
     while True:
         command = str(input('''
@@ -13,7 +29,12 @@ def run():
         '''))
 
         if command == 'a':
-            print('añadir contacto')
+            name = str(input('Escribe el nombre del contacto: '))
+            phone = str(input('Escribe el telefono del contacto: '))
+            email = str(input('Escribe el email del contacto: '))
+
+            contact_book.add(name, phone, email)
+
 
         elif command == 'ac':
             print('actualizar contacto')
