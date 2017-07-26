@@ -1,7 +1,7 @@
 def run():
 
     while True:
-        command = str(raw_input('''
+        command = str(input('''
             ¿Qué deseas hacer?
 
             [a]ñadir contacto
