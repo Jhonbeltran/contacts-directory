@@ -16,6 +16,14 @@ class ContactBook(object):
         for contact in self._contacts:
             self._print_contact(contact)
 
+    def delete(self, name):
+        #A diferencia de un For normal, estamos obteniendo el indice y el contacto
+        for idx, contact in enumerate(self._contacts):
+            if contact.name.lower() == name.lower():
+                #Eliminamos usando el indice
+                del self._contacts[idx]
+                break
+
     def _print_contact(self, contact):
         print('--- * --- * --- * --- * --- * --- * --- * ---')
         print('Nombre: {}'.format(contact.name))
@@ -54,7 +62,8 @@ def run():
             print('buscar contacto')
 
         elif command == 'e':
-            print('eliminar contacto')
+            name = str(input('Escribe el nombre del contacto que quieres eliminar: '))
+            contact_book.delete(name)
 
         elif command == 'l':
             contact_book.show_all()
