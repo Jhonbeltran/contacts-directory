@@ -24,6 +24,16 @@ class ContactBook(object):
                 del self._contacts[idx]
                 break
 
+    def edit(self, name):
+        for idx, contact in enumerate(self._contacts):
+            if contact.name.lower() == name.lower():
+                name = str(input('Escribe el nuevo nombre del contacto: '))
+                phone = str(input('Escribe el nuevo telefono del contacto: '))
+                email = str(input('Escribe el nuevo email del contacto: '))
+
+                self._update(idx, name, phone, email)
+                break
+
     def search(self, name):
         for contact in self._contacts:
             if contact.name.lower() == name.lower():
@@ -41,7 +51,17 @@ class ContactBook(object):
         print('---------------------------------------------')
 
     def _not_found(self):
+        print('---------------------------------------------')
         print('No encontrado')
+        print('---------------------------------------------')
+
+    def _update(self, idx, name, phone, email):
+        contact = Contact(name, phone, email)
+        self._contacts[idx] = contact
+        print('---------------------------------------------')
+        print('Contacto Actualizado')
+        print('---------------------------------------------')
+
 
 def run():
 
@@ -68,7 +88,8 @@ def run():
 
 
         elif command == 'ac':
-            print('actualizar contacto')
+            name = str(input('Escribe el nombre del contacto que quieres Actualizar: '))
+            contact_book.edit(name)
 
         elif command == 'b':
             name = str(input('Escribe el nombre del contacto que quieres buscar: '))
