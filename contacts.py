@@ -1,16 +1,27 @@
 class Contact:
     def __init__(self, name, phone, email):
-        self._name = name
-        self._phone = phone
-        self._email = email
+        self.name = name
+        self.phone = phone
+        self.email = email
 
 class ContactBook(object):
     def __init__(self):
         self._contacts = []
 
     def add(self, name, phone, email):
-        print('name: {}, phone: {}, email: {}'.format(name, phone, email))
-        
+        contact = Contact(name, phone, email)
+        self._contacts.append(contact)
+
+    def show_all(self):
+        for contact in self._contacts:
+            self._print_contact(contact)
+
+    def _print_contact(self, contact):
+        print('--- * --- * --- * --- * --- * --- * --- * ---')
+        print('Nombre: {}'.format(contact.name))
+        print('Teléfono: {}'.format(contact.phone))
+        print('Email: {}'.format(contact.email))
+        print('---------------------------------------------')
 
 def run():
 
@@ -46,7 +57,7 @@ def run():
             print('eliminar contacto')
 
         elif command == 'l':
-            print('listar contactos')
+            contact_book.show_all()
 
         elif command == 's':
             break
