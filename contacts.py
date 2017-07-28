@@ -1,3 +1,5 @@
+import csv
+
 class Contact:
     def __init__(self, name, phone, email):
         self.name = name
@@ -11,6 +13,7 @@ class ContactBook(object):
     def add(self, name, phone, email):
         contact = Contact(name, phone, email)
         self._contacts.append(contact)
+        self._save()
 
     def show_all(self):
         for contact in self._contacts:
@@ -22,6 +25,7 @@ class ContactBook(object):
             if contact.name.lower() == name.lower():
                 #Eliminamos usando el indice
                 del self._contacts[idx]
+                self._save()
                 break
 
     def edit(self, name):
@@ -32,6 +36,7 @@ class ContactBook(object):
                 email = str(input('Escribe el nuevo email del contacto: '))
 
                 self._update(idx, name, phone, email)
+                self._save()
                 break
 
     def search(self, name):
@@ -62,10 +67,19 @@ class ContactBook(object):
         print('Contacto Actualizado')
         print('---------------------------------------------')
 
+    def _save(self):
+        with open('contacts.csv', 'w') as f:
+            writer = csv.writer(f)
+            writer.writerow(('name', 'phone', 'email'))
+
+            for contact in self._contacts:
+                writer.writerow((contact.name, contact.phone, contact.email))
 
 def run():
 
     contact_book = ContactBook()
+
+
 
     while True:
         command = str(input('''
